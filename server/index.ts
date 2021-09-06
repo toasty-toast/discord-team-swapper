@@ -41,7 +41,6 @@ app.post('/guilds/:guildId/send-members-to-channels', async (req, res) => {
 });
 
 if (fs.existsSync(wwwPath)) {
-  console.log(`Serving from ${wwwPath}`);
   app.use(express.static(wwwPath));
 }
 
