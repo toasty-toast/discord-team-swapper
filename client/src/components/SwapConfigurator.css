@@ -1,0 +1,10 @@
+table.members-table {
+  max-height: 400px;
+  overflow-y: auto;
+  display: block;
+  width: 100%;
+}
+
+th.fill-width, td.fill-width {
+  width: 100%;
+}
