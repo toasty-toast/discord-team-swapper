@@ -96,6 +96,22 @@ const SwapConfigurator: React.FC = () => {
     await axios.post(`${getApiUrlBase()}/guilds/${selectedGuild!.id}/send-members-to-channels`, [team1, team2]);
   };
 
+  const sendMembersToTeam1Channel = async () => {
+    const target: VoiceChannelMembers = {
+      id: team1VoiceChannel!.id,
+      memberIds: members.filter(m => m.team !== Team.None).map(m => m.id)
+    };
+    await axios.post(`${getApiUrlBase()}/guilds/${selectedGuild!.id}/send-members-to-channels`, [target]);
+  };
+
+  const sendMembersToTeam2Channel = async () => {
+    const target: VoiceChannelMembers = {
+      id: team2VoiceChannel!.id,
+      memberIds: members.filter(m => m.team !== Team.None).map(m => m.id)
+    };
+    await axios.post(`${getApiUrlBase()}/guilds/${selectedGuild!.id}/send-members-to-channels`, [target]);
+  };
+
   return (
     <Form>
       <Row>
@@ -177,6 +193,14 @@ const SwapConfigurator: React.FC = () => {
       </Row>
       <Row className="mt-3">
         <Button onClick={() => sendMembersToChannels()}>Apply Teams</Button>
+      </Row>
+      <Row className="mt-1">
+        <Col className="p-0 pe-1">
+          <Button className="w-100 mr-1" onClick={() => sendMembersToTeam1Channel()}>All To Team 1 Channel</Button>
+        </Col>
+        <Col className="p-0 ps-1">
+          <Button className="w-100" onClick={() => sendMembersToTeam2Channel()}>All To Team 2 Channel</Button>
+        </Col>
       </Row>
     </Form>
   );
